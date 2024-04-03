@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput, Button, Snackbar } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AuthContext } from '../contexts/auth.context';
 
 const LoginScreen = ({ navigation }) => {
+    const { login } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [snackbarVisible, setSnackbarVisible] = useState(false);
@@ -11,26 +13,33 @@ const LoginScreen = ({ navigation }) => {
     const handleLogin = () => {
         if (email === 'k@k.com' && password === 'password') {
             console.log('Logged in successfully!');
+            login(); // Call login from AuthContext
             navigation.navigate('Dashboard');
         } else {
             setSnackbarVisible(true);
         }
     };
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            // Check if the user is already logged in
-            // This is a simple check for demonstration purposes
-            // In a real app, you would check the user's authentication status
-            const isLoggedIn = true;
+    // useEffect(() => {
+    //     const { isLoggedIn } = useContext(AuthContext);
+    //     if (isLoggedIn) {
+    //         navigation.navigate('Dashboard');
+    //     }
+    // }, [navigation]);
+    // useEffect(() => {
+    //     const unsubscribe = navigation.addListener('focus', () => {
+    //         const { isLoggedIn } = useContext(AuthContext);
+    //         // This is a simple check for demonstration purposes
+    //         // In a real app, you would check the user's authentication status
+    //         // const isLoggedIn = true;
 
-            if (isLoggedIn) {
-                navigation.navigate('Dashboard');
-            }
-        });
+    //         if (isLoggedIn) {
+    //             navigation.navigate('Dashboard');
+    //         }
+    //     });
 
-        return unsubscribe;
-    }, [navigation]);
+    //     return unsubscribe;
+    // }, [navigation]);
 
     return (
         <SafeAreaProvider>
