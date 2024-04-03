@@ -42,7 +42,7 @@ Brief description of the project.
 ## Usage
 in progress
 
-nvm use 16
+node : v21.6.1
 
 npm i -g expo-cli
 
