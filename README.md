@@ -41,8 +41,11 @@ Brief description of the project.
 
 ## Usage
 in progress
+
 nvm use 16
+
 npm i -g expo-cli
+
 npx expo start
 
 ## Contributing
